@@ -18,6 +18,13 @@ const countTodos = (items: Todo[]) => {
     return { done: doneItems, todo: todoItems };
 };
 
+// "donelast-descending"
+const sortTodos = (todos: Todo[]) => {
+    const doneItems = todos.filter((todo) => todo.isDone).sort((a, b) => b.createdAt - a.createdAt);
+    const todoItems = todos.filter((todo) => !todo.isDone).sort((a, b) => b.createdAt - a.createdAt);
+    return [...todoItems, ...doneItems];
+};
+
 export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -34,6 +41,10 @@ export const App = () => {
 
     const countedTodos = useMemo(() => {
         return countTodos(todos);
+    }, [todos]);
+
+    const sortedTodos = useMemo(() => {
+        return sortTodos(todos);
     }, [todos]);
 
     const toggleFormVisible = () => {
@@ -87,7 +98,7 @@ export const App = () => {
                         <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
                     )}
                     <List>
-                        {todos.map(({ id, label, isDone }) => {
+                        {sortedTodos.map(({ id, label, isDone }) => {
                             return (
                                 <ListItem
                                     key={id}
