@@ -27,7 +27,7 @@ const CheckboxStyled = styled(CheckboxPrimitive.Root)`
 `;
 
 const CheckboxIndicator = styled(CheckboxPrimitive.Indicator)`
-    color: ${(props) => props.theme.grass11};
+    color: ${(props) => props.theme.colors.grass11};
 `;
 
 export const Checkbox = (props: CheckboxProps) => (

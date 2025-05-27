@@ -5,8 +5,8 @@ const base = "http://localhost:3000";
 export const getTodos = async () => {
     const response = await fetch(`${base}/items`);
     const todos = (await response.json()) as Todo[];
-    return todos
-}
+    return todos;
+};
 
 export const postTodo = async (value: TodoLabel) => {
     const response = await fetch(`${base}/items`, {
@@ -18,7 +18,7 @@ export const postTodo = async (value: TodoLabel) => {
     });
     const todo = (await response.json()) as Todo;
     return todo;
-}
+};
 
 export const patchTodo = async (id: TodoId, draftTodo: Partial<Todo>) => {
     const response = await fetch(`${base}/items/${id}`, {

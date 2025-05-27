@@ -1,5 +1,5 @@
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 
 import { Checkbox } from "./Checkbox";
@@ -41,7 +41,7 @@ export type LiteeItemProp = {
     onItemLabelEdit: (label: string) => void;
     onItemDoneToggle: (isDone: boolean) => void;
     onItemDelete: () => void;
-};
+} & PropsWithChildren;
 
 export const ListItem = (props: LiteeItemProp) => {
     const { label, isDone, onItemLabelEdit, onItemDoneToggle, onItemDelete } = props;
