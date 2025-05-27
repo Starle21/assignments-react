@@ -55,8 +55,7 @@ export const App = () => {
                             );
                         })}
                     </List>
-                    {/* <Footer todoItems={countedTodos.todo} doneItems={countedTodos.done} /> */}
-                    <Footer />
+                    <Footer todoItems={countedTodos.todo} doneItems={countedTodos.done} />
                 </Layout>
             </Container>
         </ThemeProvider>
