@@ -5,12 +5,13 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "dev:storybook": "storybook dev --port 6006 --no-open",
+        "dev:storybook": "storybook dev --port 6006 --no-open --disable-telemetry",
         "build": "tsc && vite build",
         "build:storybook": "storybook build --disable-telemetry --webpack-stats-json",
         "preview": "vite preview",
         "format": "prettier --write \"src/**/*.ts*\"",
-        "lint": "eslint \"src/**/*.ts*\" --fix"
+        "lint": "eslint \"src/**/*.ts*\" --fix",
+        "types": "tsc --noEmit"
     },
     "dependencies": {
         "@radix-ui/colors": "^3.0.0",
