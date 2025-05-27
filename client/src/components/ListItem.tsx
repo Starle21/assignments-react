@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Checkbox } from "./Checkbox";
+import { Button } from "./Button";
 
 const StyledDiv = styled.div`
     display: flex;
@@ -39,12 +40,12 @@ export const ListItem = (props: LiteeItemProp) => {
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
             <Label>{label}</Label>
             <StyledActions>
-                <button onClick={() => onItemLabelEdit(label)}>
+                <Button onClick={() => onItemLabelEdit(label)} variant="base">
                     <Pencil1Icon />
-                </button>
-                <button onClick={onItemDelete}>
+                </Button>
+                <Button onClick={onItemDelete} variant="neutral">
                     <TrashIcon />
-                </button>
+                </Button>
             </StyledActions>
         </StyledDiv>
     );
