@@ -7,6 +7,9 @@ const StyledDiv = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    padding-right: 1.7rem;
 `;
 
 type HeaderProps = {

@@ -9,6 +9,7 @@ import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";
 import { Todo, TodoId, TodoLabel, TodoState } from "./types";
 import { deleteTodo, getTodos, patchCompleteTodo, patchTodo, postTodo } from "./api";
+import { styled } from "styled-components";
 
 type SubmitAction = () => (value: string) => void;
 
@@ -93,10 +94,12 @@ export const App = () => {
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header onItemAdd={addTodo}>To Do app</Header>
-                    {isFormVisible && (
-                        <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
-                    )}
+                    <Header onItemAdd={addTodo}>YOU need a TODO:</Header>
+                    <WrapperStyled>
+                        {isFormVisible && (
+                            <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
+                        )}
+                    </WrapperStyled>
                     <List>
                         {sortedTodos.map(({ id, label, isDone }) => {
                             return (
@@ -117,3 +120,7 @@ export const App = () => {
         </ThemeProvider>
     );
 };
+
+const WrapperStyled = styled.div`
+    height: 3.7rem;
+`;

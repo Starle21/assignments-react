@@ -5,8 +5,8 @@ export const Layout = styled.main`
     flex-direction: column;
 
     width: 100%;
-    max-width: 600px;
-    min-height: 50vh;
+    max-width: 700px;
+    min-height: 65vh;
     margin: 0 30px;
     padding: 20px;
 
@@ -14,4 +14,7 @@ export const Layout = styled.main`
     border: 1px solid;
     border-color: ${(props) => props.theme.colors.olive6};
     border-radius: 5px;
+
+    overflow: hidden;
+    max-height: 50vh;
 `;
