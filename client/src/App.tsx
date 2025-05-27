@@ -14,11 +14,11 @@ type Todo = {
     createdAt: number;
 };
 
-// const countTodos = (items: Todo[]) => {
-//     const doneItems = items.filter((item) => item.isDone).length;
-//     const todoItems = items.length - doneItems;
-//     return { done: doneItems, todo: todoItems };
-// };
+const countTodos = (items: Todo[]) => {
+    const doneItems = items.filter((item) => item.isDone).length;
+    const todoItems = items.length - doneItems;
+    return { done: doneItems, todo: todoItems };
+};
 
 export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -32,9 +32,9 @@ export const App = () => {
         makeRequest();
     }, []);
 
-    // const countedTodos = useMemo(() => {
-    //     return countTodos(todos);
-    // }, [todos]);
+    const countedTodos = useMemo(() => {
+        return countTodos(todos);
+    }, [todos]);
 
     return (
         <ThemeProvider>
