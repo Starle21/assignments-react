@@ -34,11 +34,11 @@ export const ListItem = (props: LiteeItemProp) => {
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
             <Label>{label}</Label>
             <StyledActions>
-                <button>
-                    <TrashIcon />
-                </button>
-                <button onClick={() => onItemDelete()}>
+                <button onClick={() => onItemLabelEdit(label)}>
                     <Pencil1Icon />
+                </button>
+                <button onClick={onItemDelete}>
+                    <TrashIcon />
                 </button>
             </StyledActions>
         </StyledDiv>

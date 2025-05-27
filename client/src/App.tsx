@@ -40,15 +40,21 @@ export const App = () => {
         setIsFormVisible((previous) => !previous);
     };
 
-    const submitTodo = async (value: string) => {
+    const submitPostTodo = async (value: TodoLabel) => {
         const todo = await postTodo(value);
         setTodos((previous) => [...previous, todo]);
         toggleFormVisible();
     };
 
-    const addTodo = (label: string) => {
+    const submitPatchTodo = async (id: TodoId, label: TodoLabel) => {
+        const savedTodo = await patchTodo(id, { label });
+        setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
+        toggleFormVisible();
+    };
+
+    const addTodo = (label: TodoLabel) => {
         setInitialFormValue(label);
-        setActionToSubmit(() => submitTodo);
+        setActionToSubmit(() => submitPostTodo);
         toggleFormVisible();
     };
 
@@ -61,7 +67,11 @@ export const App = () => {
         setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
     };
 
-    const editTodo = (id: TodoId) => (label: TodoLabel) => {};
+    const editTodo = (id: TodoId) => (label: TodoLabel) => {
+        setInitialFormValue(label);
+        setActionToSubmit(() => (newLabel: TodoLabel) => submitPatchTodo(id, newLabel));
+        toggleFormVisible();
+    };
 
     return (
         <ThemeProvider>
