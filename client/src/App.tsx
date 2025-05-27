@@ -7,13 +7,8 @@ import { ThemeProvider } from "./components/providers/ThemeProvider";
 import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";
-
-type Todo = {
-    id: number;
-    label: string;
-    isDone: boolean;
-    createdAt: number;
-};
+import { Todo } from "./types";
+import { getTodos, postTodo } from "./api";
 
 const countTodos = (items: Todo[]) => {
     const doneItems = items.filter((item) => item.isDone).length;
@@ -24,11 +19,11 @@ const countTodos = (items: Todo[]) => {
 export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const [initialFormValue, setInitialFormValue] = useState("");
 
     useEffect(() => {
         const makeRequest = async () => {
-            const request = await fetch("http://localhost:3000/items");
-            const todos = (await request.json()) as Todo[];
+            const todos = await getTodos();
             setTodos(todos);
         };
         makeRequest();
@@ -42,12 +37,28 @@ export const App = () => {
         setIsFormVisible((previous) => !previous);
     };
 
+    const submitTodo = async (value: string) => {
+        const todo = await postTodo(value);
+        setTodos((previous) => [...previous, todo]);
+    };
+
+    const addTodo = (label: string) => {
+        setInitialFormValue(label);
+        toggleFormVisible();
+    };
+
+    const cancelTodo = () => {
+        toggleFormVisible();
+    };
+
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header onItemAdd={() => toggleFormVisible()}>To Do app</Header>
-                    {isFormVisible && <Form initialValue="" onSubmit={() => {}} onCancel={() => {}} />}
+                    <Header onItemAdd={addTodo}>To Do app</Header>
+                    {isFormVisible && (
+                        <Form initialValue={initialFormValue} onSubmit={submitTodo} onCancel={cancelTodo} />
+                    )}
                     <List>
                         {todos.map(({ id, label, isDone }) => {
                             return (

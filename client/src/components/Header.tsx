@@ -38,8 +38,10 @@ export const Header = (props: HeaderProps) => {
             <h1>{children}</h1>
             <button
                 onClick={(e) => {
-                    onItemAdd("sth");
+                    const label = e.currentTarget.dataset.label ?? "";
+                    onItemAdd(label);
                 }}
+                data-label="placeholder"
             >
                 <PlusIcon />
             </button>
