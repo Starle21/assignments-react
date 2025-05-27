@@ -29,3 +29,9 @@ export const patchTodo = async (id: TodoId, draftTodo: Partial<Todo>) => {
     const returnedItem = (await response.json()) as Todo;
     return returnedItem;
 };
+
+export const deleteTodo = async (id: TodoId) => {
+    await fetch(`http://localhost:3000/items/${id}`, {
+        method: "DELETE",
+    });
+};

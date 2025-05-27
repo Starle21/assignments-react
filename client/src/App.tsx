@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";
 import { Todo, TodoId, TodoLabel, TodoState } from "./types";
-import { getTodos, patchTodo, postTodo } from "./api";
+import { deleteTodo, getTodos, patchTodo, postTodo } from "./api";
 
 type SubmitAction = () => (value: string) => void;
 
@@ -73,6 +73,11 @@ export const App = () => {
         toggleFormVisible();
     };
 
+    const removeTodo = (id: TodoId) => async () => {
+        await deleteTodo(id);
+        setTodos((previous) => previous.filter((todo) => todo.id !== id));
+    };
+
     return (
         <ThemeProvider>
             <Container>
@@ -88,7 +93,7 @@ export const App = () => {
                                     key={id}
                                     label={label}
                                     isDone={isDone}
-                                    onItemDelete={() => {}}
+                                    onItemDelete={removeTodo(id)}
                                     onItemDoneToggle={toggleDoneTodo(id)}
                                     onItemLabelEdit={editTodo(id)}
                                 />

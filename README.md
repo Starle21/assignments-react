@@ -62,7 +62,7 @@ _Fix all other bugs and visual imperfections you find._
 -   [x] **F5**: Complete a todo item
     -   After clicking on the checkbox in the `ListItem`, the todo item should toggle between "done" and "todo" states.
     -   Changes to the data should be persisted on the server via an API call.
--   [ ] **F6**: Delete a todo item
+-   [x] **F6**: Delete a todo item
     -   After clicking the "delete" button in the `ListItem`, the todo item should be deleted.
     -   Changes to the data should be persisted on the server via an API call.
 -   [ ] **F7**: Sort the todo items
