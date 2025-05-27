@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";
 import { Todo, TodoId, TodoLabel, TodoState } from "./types";
-import { deleteTodo, getTodos, patchTodo, postTodo } from "./api";
+import { deleteTodo, getTodos, patchCompleteTodo, patchTodo, postTodo } from "./api";
 
 type SubmitAction = () => (value: string) => void;
 
@@ -74,7 +74,7 @@ export const App = () => {
     };
 
     const toggleDoneTodo = (id: TodoId) => async (isDone: TodoState) => {
-        const savedTodo = await patchTodo(id, { isDone });
+        const savedTodo = isDone ? await patchCompleteTodo(id) : await patchTodo(id, { isDone });
         setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
     };
 
