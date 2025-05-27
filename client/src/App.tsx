@@ -7,8 +7,8 @@ import { ThemeProvider } from "./components/providers/ThemeProvider";
 import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";
-import { Todo } from "./types";
-import { getTodos, postTodo } from "./api";
+import { Todo, TodoId, TodoState } from "./types";
+import { getTodos, patchTodo, postTodo } from "./api";
 
 const countTodos = (items: Todo[]) => {
     const doneItems = items.filter((item) => item.isDone).length;
@@ -51,6 +51,11 @@ export const App = () => {
         toggleFormVisible();
     };
 
+    const toggleDoneTodo = (id: TodoId) => async (isDone: TodoState) => {
+        const savedTodo = await patchTodo(id, { isDone });
+        setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
+    };
+
     return (
         <ThemeProvider>
             <Container>
@@ -67,7 +72,7 @@ export const App = () => {
                                     label={label}
                                     isDone={isDone}
                                     onItemDelete={() => {}}
-                                    onItemDoneToggle={() => {}}
+                                    onItemDoneToggle={toggleDoneTodo(id)}
                                     onItemLabelEdit={() => {}}
                                 />
                             );

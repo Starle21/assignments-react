@@ -1,4 +1,4 @@
-import { Todo } from "./types";
+import { Todo, TodoId, TodoLabel } from "./types";
 
 export const getTodos = async () => {
     const response = await fetch("http://localhost:3000/items");
@@ -6,7 +6,7 @@ export const getTodos = async () => {
     return todos
 }
 
-export const postTodo = async (value: string) => {
+export const postTodo = async (value: TodoLabel) => {
     const response = await fetch("http://localhost:3000/items", {
         method: "POST",
         headers: {
@@ -17,3 +17,15 @@ export const postTodo = async (value: string) => {
     const todo = (await response.json()) as Todo;
     return todo;
 }
+
+export const patchTodo = async (id: TodoId, draftTodo: Partial<Todo>) => {
+    const response = await fetch(`http://localhost:3000/items/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(draftTodo),
+    });
+    const returnedItem = (await response.json()) as Todo;
+    return returnedItem;
+};
