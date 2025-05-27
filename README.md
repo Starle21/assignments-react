@@ -37,9 +37,9 @@ Using the provided UI components, implement the following modifications, bugfixe
 
 #### Bugs
 
--   [ ] **B1**: `List` content
+-   [] **B1**: `List` content
     -   Fix the content alignment of the non-empty `List` component.
--   [ ] **B2**: `Footer` alignment
+-   [x] **B2**: `Footer` alignment
     -   Fix the `Layout` component so the `Footer` is always attached to the bottom of the `Layout`.
 
 _Fix all other bugs and visual imperfections you find._
@@ -48,7 +48,7 @@ _Fix all other bugs and visual imperfections you find._
 
 -   [ ] **F1**: Default values in `Footer`
     -   Modify the counters in `Footer` to show 0 when no value(s) are passed.
--   [ ] **F2**: Load todo items
+-   [x] **F2**: Load todo items
     -   After opening the application, todo items should be loaded from the server
     -   The todo items should be displayed in the `List` component.
 -   [ ] **F3**: Add a todo item
@@ -78,7 +78,7 @@ _Fix all other bugs and visual imperfections you find._
 
 -   [ ] **UI1**: `Header` "add" button alignment
     -   The "add" button should be aligned to the right in the `Header` component.
--   [ ] **UI2**: `ListItem` actions alignment
+-   [x] **UI2**: `ListItem` actions alignment
     -   Action buttons in the `ListItem` component should be aligned to the right.
 -   [ ] **UI3**: `ListItem` actions visibility
     -   Action buttons in the `ListItem` component should be visible only when hovering over the `ListItem`.

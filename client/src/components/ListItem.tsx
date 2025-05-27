@@ -8,9 +8,14 @@ const StyledDiv = styled.div`
     display: flex;
     align-items: center;
 `;
+const StyledActions = styled.div`
+    display: flex;
+    column-gap: 0.2rem;
+`;
 
 const Label = styled.label`
     margin-left: 15px;
+    flex-grow: 1;
 `;
 
 export type LiteeItemProp = {
@@ -28,12 +33,14 @@ export const ListItem = (props: LiteeItemProp) => {
         <StyledDiv>
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
             <Label>{label}</Label>
-            <button>
-                <TrashIcon />
-            </button>
-            <button onClick={() => onItemDelete()}>
-                <Pencil1Icon />
-            </button>
+            <StyledActions>
+                <button>
+                    <TrashIcon />
+                </button>
+                <button onClick={() => onItemDelete()}>
+                    <Pencil1Icon />
+                </button>
+            </StyledActions>
         </StyledDiv>
     );
 };
