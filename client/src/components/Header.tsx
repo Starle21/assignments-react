@@ -7,6 +7,7 @@ const StyledDiv = styled.header`
 
     button {
         all: unset;
+        cursor: pointer;
 
         display: flex;
         align-items: center;
@@ -30,12 +31,16 @@ type HeaderProps = {
 };
 
 export const Header = (props: HeaderProps) => {
-    const { children } = props;
+    const { children, onItemAdd } = props;
 
     return (
         <StyledDiv>
             <h1>{children}</h1>
-            <button>
+            <button
+                onClick={(e) => {
+                    onItemAdd("sth");
+                }}
+            >
                 <PlusIcon />
             </button>
         </StyledDiv>

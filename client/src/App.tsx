@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/providers/ThemeProvider";
 import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
+import { Form } from "./components/form";
 
 type Todo = {
     id: number;
@@ -22,6 +23,7 @@ const countTodos = (items: Todo[]) => {
 
 export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     useEffect(() => {
         const makeRequest = async () => {
@@ -36,11 +38,16 @@ export const App = () => {
         return countTodos(todos);
     }, [todos]);
 
+    const toggleFormVisible = () => {
+        setIsFormVisible((previous) => !previous);
+    };
+
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header onItemAdd={() => console.warn("unimplemented")}>To Do app</Header>
+                    <Header onItemAdd={() => toggleFormVisible()}>To Do app</Header>
+                    {isFormVisible && <Form initialValue="" onSubmit={() => {}} onCancel={() => {}} />}
                     <List>
                         {todos.map(({ id, label, isDone }) => {
                             return (
