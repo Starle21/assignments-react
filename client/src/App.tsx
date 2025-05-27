@@ -7,8 +7,10 @@ import { ThemeProvider } from "./components/providers/ThemeProvider";
 import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";
-import { Todo, TodoId, TodoState } from "./types";
+import { Todo, TodoId, TodoLabel, TodoState } from "./types";
 import { getTodos, patchTodo, postTodo } from "./api";
+
+type SubmitAction = () => (value: string) => void;
 
 const countTodos = (items: Todo[]) => {
     const doneItems = items.filter((item) => item.isDone).length;
@@ -20,6 +22,7 @@ export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [initialFormValue, setInitialFormValue] = useState("");
+    const [actionToSubmit, setActionToSubmit] = useState<SubmitAction>(() => () => {});
 
     useEffect(() => {
         const makeRequest = async () => {
@@ -40,10 +43,12 @@ export const App = () => {
     const submitTodo = async (value: string) => {
         const todo = await postTodo(value);
         setTodos((previous) => [...previous, todo]);
+        toggleFormVisible();
     };
 
     const addTodo = (label: string) => {
         setInitialFormValue(label);
+        setActionToSubmit(() => submitTodo);
         toggleFormVisible();
     };
 
@@ -56,13 +61,15 @@ export const App = () => {
         setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
     };
 
+    const editTodo = (id: TodoId) => (label: TodoLabel) => {};
+
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
                     <Header onItemAdd={addTodo}>To Do app</Header>
                     {isFormVisible && (
-                        <Form initialValue={initialFormValue} onSubmit={submitTodo} onCancel={cancelTodo} />
+                        <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
                     )}
                     <List>
                         {todos.map(({ id, label, isDone }) => {
@@ -73,7 +80,7 @@ export const App = () => {
                                     isDone={isDone}
                                     onItemDelete={() => {}}
                                     onItemDoneToggle={toggleDoneTodo(id)}
-                                    onItemLabelEdit={() => {}}
+                                    onItemLabelEdit={editTodo(id)}
                                 />
                             );
                         })}
