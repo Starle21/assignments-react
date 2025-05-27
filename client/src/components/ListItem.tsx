@@ -7,8 +7,13 @@ import { Checkbox } from "./Checkbox";
 const StyledDiv = styled.div`
     display: flex;
     align-items: center;
+
+    &:hover > :last-child {
+        visibility: visible;
+    }
 `;
 const StyledActions = styled.div`
+    visibility: hidden;
     display: flex;
     column-gap: 0.2rem;
 `;
