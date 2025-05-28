@@ -40,7 +40,9 @@ export const TodoHeading: FC<TodoHeadingProp> = ({
     };
     return (
         <HeadingStyled>
-            <Header onItemAdd={addTodo}>YOU need a TODO:</Header>
+            <Header onItemAdd={addTodo}>
+                YOU need a <HiglightStyled>TODO:</HiglightStyled>
+            </Header>
             <WrapperStyled>
                 {isFormVisible && (
                     <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
@@ -57,6 +59,10 @@ const HeadingStyled = styled.div`
     justify-content: space-between;
     padding: 0 0.5rem 0.5rem 0.5rem;
     margin-top: 1rem;
+`;
+
+const HiglightStyled = styled.span`
+    color: ${(props) => props.theme.colors.primary100};
 `;
 
 const WrapperStyled = styled.div`

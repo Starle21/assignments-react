@@ -1,20 +1,14 @@
 import { Layout } from "./components/Layout";
-import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/styles/providers/ThemeProvider";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Todo } from "./types";
 import { getTodos } from "./api";
 import { TodoHeading } from "./container-components/TodoHeading";
 import { TodoList } from "./container-components/TodoList";
 import { Container } from "./components/Container";
+import { TodoStatistics } from "./container-components/TodoStatistics";
 
 export type SubmitAction = () => (value: string) => void;
-
-const countTodos = (items: Todo[]) => {
-    const doneItems = items.filter((item) => item.isDone).length;
-    const todoItems = items.length - doneItems;
-    return { done: doneItems, todo: todoItems };
-};
 
 export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -29,10 +23,6 @@ export const App = () => {
         };
         makeRequest();
     }, []);
-
-    const countedTodos = useMemo(() => {
-        return countTodos(todos);
-    }, [todos]);
 
     const toggleFormVisible = () => {
         setIsFormVisible((previous) => !previous);
@@ -55,7 +45,7 @@ export const App = () => {
                 <Layout>
                     <TodoHeading {...todoHeadingProps} />
                     <TodoList {...todoListProps} />
-                    <Footer todoItems={countedTodos.todo} doneItems={countedTodos.done} />
+                    <TodoStatistics todos={todos} />
                 </Layout>
             </Container>
         </ThemeProvider>
