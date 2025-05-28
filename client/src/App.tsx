@@ -21,7 +21,7 @@ export const App = () => {
 
     useEffect(() => {
         const makeRequest = async () => {
-            const todos = await getTodos();
+            const todos = (await getTodos()) as Todo[];
             setTodos(todos);
         };
         makeRequest();

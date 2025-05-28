@@ -35,7 +35,7 @@ export const TodoHeading: FC<TodoHeadingProp> = ({
         toggleFormVisible();
     };
     const submitPostTodo = async (value: TodoLabel) => {
-        const todo = await postTodo(value);
+        const todo = (await postTodo(value)) as Todo;
         setTodos((previous) => [...previous, todo]);
         toggleFormVisible();
     };

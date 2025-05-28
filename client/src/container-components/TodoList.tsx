@@ -38,12 +38,14 @@ export const TodoList: FC<TodoListProp> = ({
         toggleFormVisible();
     };
     const submitPatchTodo = async (id: TodoId, label: TodoLabel) => {
-        const savedTodo = await patchTodo(id, { label });
+        const savedTodo = (await patchTodo(id, { label })) as Todo;
         setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
         toggleFormVisible();
     };
     const toggleDoneTodo = (id: TodoId) => async (isDone: TodoState) => {
-        const savedTodo = isDone ? await patchCompleteTodo(id) : await patchTodo(id, { isDone });
+        const savedTodo = isDone
+            ? ((await patchCompleteTodo(id)) as Todo)
+            : ((await patchTodo(id, { isDone })) as Todo);
         setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
     };
     const sortedTodos = useMemo(() => {
