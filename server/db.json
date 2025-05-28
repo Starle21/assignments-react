@@ -25,14 +25,7 @@
       "id": 4
     },
     {
-      "label": "to not forget to buy your spaceship!",
-      "isDone": true,
-      "createdAt": 1748384685788,
-      "id": 10,
-      "finishedAt": 1748384698522
-    },
-    {
-      "label": "to not forget to buy your spaceship!",
+      "label": "to not forget to book a dinner for two!",
       "isDone": false,
       "createdAt": 1748386910739,
       "id": 14

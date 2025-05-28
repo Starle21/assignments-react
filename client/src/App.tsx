@@ -1,29 +1,19 @@
-import { Container } from "./components/Container";
 import { Layout } from "./components/Layout";
-import { List } from "./components/List";
-import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/styles/providers/ThemeProvider";
 import { useEffect, useMemo, useState } from "react";
-import { ListItem } from "./components/ListItem";
-import { Form } from "./components/form";
-import { Todo, TodoId, TodoLabel, TodoState } from "./types";
-import { deleteTodo, getTodos, patchCompleteTodo, patchTodo, postTodo } from "./api";
-import { styled } from "styled-components";
+import { Todo } from "./types";
+import { getTodos } from "./api";
+import { TodoHeading } from "./container-components/TodoHeading";
+import { TodoList } from "./container-components/TodoList";
+import { Container } from "./components/Container";
 
-type SubmitAction = () => (value: string) => void;
+export type SubmitAction = () => (value: string) => void;
 
 const countTodos = (items: Todo[]) => {
     const doneItems = items.filter((item) => item.isDone).length;
     const todoItems = items.length - doneItems;
     return { done: doneItems, todo: todoItems };
-};
-
-// "donelast-descending"
-const sortTodos = (todos: Todo[]) => {
-    const doneItems = todos.filter((todo) => todo.isDone).sort((a, b) => b.createdAt - a.createdAt);
-    const todoItems = todos.filter((todo) => !todo.isDone).sort((a, b) => b.createdAt - a.createdAt);
-    return [...todoItems, ...doneItems];
 };
 
 export const App = () => {
@@ -44,83 +34,30 @@ export const App = () => {
         return countTodos(todos);
     }, [todos]);
 
-    const sortedTodos = useMemo(() => {
-        return sortTodos(todos);
-    }, [todos]);
-
     const toggleFormVisible = () => {
         setIsFormVisible((previous) => !previous);
     };
 
-    const submitPostTodo = async (value: TodoLabel) => {
-        const todo = await postTodo(value);
-        setTodos((previous) => [...previous, todo]);
-        toggleFormVisible();
-    };
-
-    const submitPatchTodo = async (id: TodoId, label: TodoLabel) => {
-        const savedTodo = await patchTodo(id, { label });
-        setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
-        toggleFormVisible();
-    };
-
-    const addTodo = (label: TodoLabel) => {
-        setInitialFormValue(label);
-        setActionToSubmit(() => submitPostTodo);
-        toggleFormVisible();
-    };
-
-    const cancelTodo = () => {
-        toggleFormVisible();
-    };
-
-    const toggleDoneTodo = (id: TodoId) => async (isDone: TodoState) => {
-        const savedTodo = isDone ? await patchCompleteTodo(id) : await patchTodo(id, { isDone });
-        setTodos((previous) => previous.map((stored) => (stored.id === savedTodo.id ? savedTodo : stored)));
-    };
-
-    const editTodo = (id: TodoId) => (label: TodoLabel) => {
-        setInitialFormValue(label);
-        setActionToSubmit(() => (newLabel: TodoLabel) => submitPatchTodo(id, newLabel));
-        toggleFormVisible();
-    };
-
-    const removeTodo = (id: TodoId) => async () => {
-        await deleteTodo(id);
-        setTodos((previous) => previous.filter((todo) => todo.id !== id));
+    const todoListProps = { setTodos, todos, toggleFormVisible, setInitialFormValue, setActionToSubmit };
+    const todoHeadingProps = {
+        setInitialFormValue,
+        setActionToSubmit,
+        actionToSubmit,
+        initialFormValue,
+        isFormVisible,
+        toggleFormVisible,
+        setTodos,
     };
 
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header onItemAdd={addTodo}>YOU need a TODO:</Header>
-                    <WrapperStyled>
-                        {isFormVisible && (
-                            <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
-                        )}
-                    </WrapperStyled>
-                    <List>
-                        {sortedTodos.map(({ id, label, isDone }) => {
-                            return (
-                                <ListItem
-                                    key={id}
-                                    label={label}
-                                    isDone={isDone}
-                                    onItemDelete={removeTodo(id)}
-                                    onItemDoneToggle={toggleDoneTodo(id)}
-                                    onItemLabelEdit={editTodo(id)}
-                                />
-                            );
-                        })}
-                    </List>
+                    <TodoHeading {...todoHeadingProps} />
+                    <TodoList {...todoListProps} />
                     <Footer todoItems={countedTodos.todo} doneItems={countedTodos.done} />
                 </Layout>
             </Container>
         </ThemeProvider>
     );
 };
-
-const WrapperStyled = styled.div`
-    height: 3.7rem;
-`;

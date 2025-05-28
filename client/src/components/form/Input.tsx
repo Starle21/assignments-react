@@ -3,7 +3,13 @@ import styled from "styled-components";
 const InputStyled = styled.input`
     all: unset;
     flex-grow: 1;
-    margin-left: 2.5rem;
+    margin-left: 3.2rem;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+
+    &:focus {
+        border-bottom: 2px solid ${(props) => props.theme.colors.primary100};
+    }
 `;
 
 type InputProps = {

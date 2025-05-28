@@ -6,7 +6,7 @@ import { Button } from "./Button";
 const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     height: 3rem;
     padding: 0.5rem 1rem;
     padding-right: 1.7rem;
