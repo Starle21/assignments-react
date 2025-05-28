@@ -3,7 +3,7 @@ import { Layout } from "./components/Layout";
 import { List } from "./components/List";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { ThemeProvider } from "./components/providers/ThemeProvider";
+import { ThemeProvider } from "./components/styles/providers/ThemeProvider";
 import { useEffect, useMemo, useState } from "react";
 import { ListItem } from "./components/ListItem";
 import { Form } from "./components/form";

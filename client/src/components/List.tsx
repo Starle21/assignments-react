@@ -8,4 +8,6 @@ export const List = styled.div`
 
     overflow: auto;
     height: 100%;
+
+    padding: 0.6rem 0.5rem;
 `;

@@ -1,6 +1,6 @@
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { Input } from "./Input";
 import { Button } from "../Button";
@@ -19,12 +19,30 @@ const FormStyled = styled.form`
     padding: 1rem 0.5rem;
     line-height: 3rem;
     border-radius: 0.5rem;
+    outline: 2px solid ${(props) => props.theme.colors.primary100};
 
-    background: linear-gradient(
-        -45deg,
-        ${(props) => props.theme.colors.blackA2},
-        ${(props) => props.theme.colors.blackA2}
-    );
+    &:hover,
+    &:focus-within {
+        background: linear-gradient(
+            -45deg,
+            ${(props) => props.theme.colors.beige400},
+            ${(props) => props.theme.colors.beige500}
+        );
+    }
+`;
+
+export const ThickSubmitIcon = styled(CheckIcon)`
+    path {
+        stroke-width: 1;
+        stroke: ${(props) => props.theme.colors.white100};
+    }
+`;
+
+export const ThickCancelIcon = styled(Cross1Icon)`
+    path {
+        stroke-width: 3;
+        stroke: ${(props) => props.theme.colors.white100};
+    }
 `;
 
 const ActionsStyled = styled.div`
@@ -37,6 +55,7 @@ export const Form = (props: FormProps) => {
     const { initialValue, onSubmit, onCancel } = props;
 
     const [inputValue, setInputValue] = useState(initialValue);
+    const theme = useTheme();
 
     return (
         <FormStyled
@@ -51,10 +70,10 @@ export const Form = (props: FormProps) => {
             <Input value={inputValue} onValueChange={(value) => setInputValue(value)} />
             <ActionsStyled>
                 <Button type={"submit"} variant="base">
-                    <CheckIcon />
+                    <ThickSubmitIcon width={25} height={25} color={theme.colors.white100} />
                 </Button>
                 <Button type={"reset"} variant="neutral">
-                    <Cross1Icon />
+                    <ThickCancelIcon width={17} height={17} color={theme.colors.white100} />
                 </Button>
             </ActionsStyled>
         </FormStyled>

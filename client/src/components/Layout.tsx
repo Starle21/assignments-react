@@ -10,11 +10,12 @@ export const Layout = styled.main`
     margin: 0 30px;
     padding: 20px;
 
-    background-color: rgb(255, 255, 255);
-    border: 1px solid;
-    border-color: ${(props) => props.theme.colors.olive6};
-    border-radius: 5px;
+    background-color: ${(props) => props.theme.colors.beige200};
+    outline: 1px solid ${(props) => props.theme.colors.white200};
+    outline-offset: 2pt;
+    border-radius: 4px;
 
     overflow: hidden;
     max-height: 50vh;
+    min-width: 300px;
 `;

@@ -2,7 +2,7 @@ import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { List } from "../List";
-import { ListItem, LiteeItemProp } from "../ListItem";
+import { ListItem, ListItemProp } from "../ListItem";
 
 const meta = {
     title: "List",
@@ -12,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof ListItem>;
 
-const emptyHandlers: Pick<LiteeItemProp, "onItemLabelEdit" | "onItemDoneToggle" | "onItemDelete"> = {
+const emptyHandlers: Pick<ListItemProp, "onItemLabelEdit" | "onItemDoneToggle" | "onItemDelete"> = {
     onItemLabelEdit: action("Edit requested"),
     onItemDoneToggle: action("Done state change requested"),
     onItemDelete: action("Removal requested"),

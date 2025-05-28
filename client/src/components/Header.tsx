@@ -1,15 +1,28 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Button } from "./Button";
 
-const StyledDiv = styled.header`
+const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 3rem;
     padding: 0.5rem 1rem;
     padding-right: 1.7rem;
+`;
+
+const StyledTitle = styled.h1`
+    font-weight: 900;
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+`;
+
+export const ThickAddIcon = styled(PlusIcon)`
+    path {
+        stroke-width: 2;
+        stroke: ${(props) => props.theme.colors.white100};
+    }
 `;
 
 type HeaderProps = {
@@ -19,10 +32,11 @@ type HeaderProps = {
 
 export const Header = (props: HeaderProps) => {
     const { children, onItemAdd } = props;
+    const theme = useTheme();
 
     return (
-        <StyledDiv>
-            <h1>{children}</h1>
+        <StyledHeader>
+            <StyledTitle>{children}</StyledTitle>
             <Button
                 onClick={(e) => {
                     const label = e.currentTarget.dataset.label ?? "";
@@ -31,8 +45,8 @@ export const Header = (props: HeaderProps) => {
                 data-label="to not forget to buy your spaceship!"
                 variant="circular"
             >
-                <PlusIcon />
+                <ThickAddIcon width={30} height={30} color={theme.colors.white100} />
             </Button>
-        </StyledDiv>
+        </StyledHeader>
     );
 };
