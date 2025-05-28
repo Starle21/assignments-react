@@ -4,6 +4,7 @@ import { List } from "../components/List";
 import { ListItem } from "../components/ListItem";
 import { Todo, TodoId, TodoLabel, TodoState } from "../types";
 import { SubmitAction } from "../App";
+import { AnimatePresence, motion } from "framer-motion";
 
 // "donelast-descending"
 const sortTodos = (todos: Todo[]) => {
@@ -51,18 +52,29 @@ export const TodoList: FC<TodoListProp> = ({
 
     return (
         <List>
-            {sortedTodos.map(({ id, label, isDone }) => {
-                return (
-                    <ListItem
-                        key={id}
-                        label={label}
-                        isDone={isDone}
-                        onItemDelete={removeTodo(id)}
-                        onItemDoneToggle={toggleDoneTodo(id)}
-                        onItemLabelEdit={editTodo(id)}
-                    />
-                );
-            })}
+            <AnimatePresence>
+                {sortedTodos.map(({ id, label, isDone }) => {
+                    return (
+                        <motion.div
+                            key={id}
+                            layout
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <ListItem
+                                key={id}
+                                label={label}
+                                isDone={isDone}
+                                onItemDelete={removeTodo(id)}
+                                onItemDoneToggle={toggleDoneTodo(id)}
+                                onItemLabelEdit={editTodo(id)}
+                            />
+                        </motion.div>
+                    );
+                })}
+            </AnimatePresence>
         </List>
     );
 };

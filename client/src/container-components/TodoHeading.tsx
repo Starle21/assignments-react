@@ -5,6 +5,7 @@ import { Todo, TodoLabel } from "../types";
 import { postTodo } from "../api";
 import { Header } from "../components/Header";
 import { Form } from "../components/form";
+import { AnimatePresence, motion } from "framer-motion";
 
 type TodoHeadingProp = {
     setInitialFormValue: React.Dispatch<React.SetStateAction<string>>;
@@ -44,9 +45,19 @@ export const TodoHeading: FC<TodoHeadingProp> = ({
                 YOU need a <HiglightStyled>TODO:</HiglightStyled>
             </Header>
             <WrapperStyled>
-                {isFormVisible && (
-                    <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
-                )}
+                <AnimatePresence>
+                    {isFormVisible && (
+                        <motion.div
+                            layout
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <Form initialValue={initialFormValue} onSubmit={actionToSubmit} onCancel={cancelTodo} />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </WrapperStyled>
         </HeadingStyled>
     );

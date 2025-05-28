@@ -7,6 +7,7 @@ import { TodoHeading } from "./container-components/TodoHeading";
 import { TodoList } from "./container-components/TodoList";
 import { Container } from "./components/Container";
 import { TodoStatistics } from "./container-components/TodoStatistics";
+import { Logo } from "./components/Logo";
 
 export type SubmitAction = () => (value: string) => void;
 
@@ -14,7 +15,9 @@ export const App = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [initialFormValue, setInitialFormValue] = useState("");
-    const [actionToSubmit, setActionToSubmit] = useState<SubmitAction>(() => () => {});
+    const [actionToSubmit, setActionToSubmit] = useState<SubmitAction>(() => () => {
+        console.warn("no action to do");
+    });
 
     useEffect(() => {
         const makeRequest = async () => {
@@ -47,6 +50,7 @@ export const App = () => {
                     <TodoList {...todoListProps} />
                     <TodoStatistics todos={todos} />
                 </Layout>
+                <Logo />
             </Container>
         </ThemeProvider>
     );

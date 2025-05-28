@@ -16,6 +16,7 @@ const StyledTitle = styled.h1`
     font-weight: 900;
     font-size: 3rem;
     letter-spacing: 0.1em;
+    text-transform: uppercase;
 `;
 
 export const ThickAddIcon = styled(PlusIcon)`
