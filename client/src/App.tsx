@@ -1,5 +1,5 @@
 import { Layout } from "./components/Layout";
-import { ThemeProvider } from "./components/styles/providers/ThemeProvider";
+import { ThemeProvider } from "./styles/providers/ThemeProvider";
 import { useEffect, useState } from "react";
 import { Todo } from "./types";
 import { getTodos } from "./api";
