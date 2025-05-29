@@ -1,3 +1,5 @@
+import { TodoId } from "./types";
+
 // Use Cases - input ports to core
 export type InitializeTodos = () => Promise<void>;
 export type CreateTodo = (label: string) => Promise<void>;

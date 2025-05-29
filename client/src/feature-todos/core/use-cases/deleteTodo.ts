@@ -12,7 +12,6 @@ type Dependencies = {
 };
 
 const deleteTodo: DeleteTodo = async (id, { removeTodo, deleteTodoServer }: Dependencies = {} as Dependencies) => {
-
     try {
         await deleteTodoServer(id);
         removeTodo(id);

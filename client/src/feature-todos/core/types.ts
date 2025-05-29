@@ -35,5 +35,3 @@ export type CountedTodos = {
 };
 
 export type ValidatedLabel = string;
-
-

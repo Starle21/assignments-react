@@ -17,12 +17,11 @@ const createTodo: CreateTodo = async (rawLabel, { saveTodo, postTodo }: Dependen
 
     try {
         const newTodo = createNewRawTodo(validatedLabel);
-        const todo = (await postTodo(newTodo));
+        const todo = await postTodo(newTodo);
         saveTodo(todo);
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
     }
-
 };
 
 export const useCreateTodo = () => {

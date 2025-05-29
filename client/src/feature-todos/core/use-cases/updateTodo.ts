@@ -16,7 +16,7 @@ const updateTodo: UpdateTodo = async (id, rawLabel, { saveTodo, patchTodo }: Dep
     // const validatedLabel = validateLabel(rawLabel);
     try {
         const updatedTodo = createLabelTodo(id, rawLabel);
-        const savedTodo = (await patchTodo(updatedTodo));
+        const savedTodo = await patchTodo(updatedTodo);
         saveTodo(savedTodo);
     } catch (e: any) {
         console.error(e.name || "Unknown Error");

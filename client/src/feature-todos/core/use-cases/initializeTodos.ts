@@ -10,7 +10,9 @@ type Dependencies = {
     requestTodos: GetTodosServer;
 };
 
-export const initializeTodos: InitializeTodos = async ({ saveTodos, requestTodos }: Dependencies = {} as Dependencies) => {
+export const initializeTodos: InitializeTodos = async (
+    { saveTodos, requestTodos }: Dependencies = {} as Dependencies
+) => {
     try {
         const serverTodos = await requestTodos();
         saveTodos(serverTodos);

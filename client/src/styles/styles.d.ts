@@ -1,8 +1,8 @@
 import "styled-components";
 
 declare module "styled-components" {
-    export interface DefaultThemes extends Themes { }
-    export interface DefaultTheme extends Theme { }
+    export interface DefaultThemes extends Themes {}
+    export interface DefaultTheme extends Theme {}
 }
 
 type Themes = Record<ThemeTokens, Theme>;

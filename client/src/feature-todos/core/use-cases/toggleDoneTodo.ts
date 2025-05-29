@@ -22,9 +22,7 @@ const toggleDoneTodo: ToggleCompleteTodo = async (
     const checkedTodo = createCheckedTodo(id, isDone);
 
     try {
-        const savedTodo = isDone
-            ? ((await patchCompleteTodo(id)))
-            : ((await patchTodo(checkedTodo)));
+        const savedTodo = isDone ? await patchCompleteTodo(id) : await patchTodo(checkedTodo);
         saveTodo(savedTodo);
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
