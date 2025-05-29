@@ -1,44 +1,13 @@
 import { styled } from "styled-components";
-import { SubmitAction } from "../App";
-import { FC } from "react";
-import { Todo, TodoLabel } from "../types";
-import { postTodo } from "../api";
 import { Header } from "../components/Header";
 import { Form } from "../components/form";
 import { AnimatePresence, motion } from "framer-motion";
+import { useUIState, useUserInteractionApi } from "../user-interactions/infrastructure/userInteractionStore";
 
-type TodoHeadingProp = {
-    setInitialFormValue: React.Dispatch<React.SetStateAction<string>>;
-    setActionToSubmit: React.Dispatch<React.SetStateAction<SubmitAction>>;
-    actionToSubmit: SubmitAction;
-    initialFormValue: string;
-    isFormVisible: boolean;
-    toggleFormVisible: () => void;
-    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-};
+export const TodoHeading = () => {
+    const { addTodo, cancelTodo } = useUserInteractionApi();
+    const { actionToSubmit, isFormVisible, initialFormValue } = useUIState();
 
-export const TodoHeading: FC<TodoHeadingProp> = ({
-    setInitialFormValue,
-    setActionToSubmit,
-    actionToSubmit,
-    toggleFormVisible,
-    setTodos,
-    isFormVisible,
-    initialFormValue,
-}) => {
-    const cancelTodo = () => {
-        toggleFormVisible();
-    };
-    const addTodo = (label: TodoLabel) => {
-        setInitialFormValue(label);
-        setActionToSubmit(() => submitPostTodo);
-        toggleFormVisible();
-    };
-    const submitPostTodo = async (value: TodoLabel) => {
-        const todo = (await postTodo(value)) as Todo;
-        setTodos((previous) => [...previous, todo]);
-        toggleFormVisible();
-    };
     return (
         <HeadingStyled>
             <Header onItemAdd={addTodo}>

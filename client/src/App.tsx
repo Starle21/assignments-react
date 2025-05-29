@@ -1,54 +1,31 @@
 import { Layout } from "./components/Layout";
 import { ThemeProvider } from "./styles/providers/ThemeProvider";
 import { useEffect, useState } from "react";
-import { Todo } from "./types";
+import { FullTodo } from "./user-interactions/types";
 import { getTodos } from "./api";
 import { TodoHeading } from "./container-components/TodoHeading";
 import { TodoList } from "./container-components/TodoList";
 import { Container } from "./components/Container";
 import { TodoStatistics } from "./container-components/TodoStatistics";
 import { Logo } from "./components/Logo";
-
-export type SubmitAction = () => (value: string) => void;
+import { TodoStore } from "./user-interactions/infrastructure/todoStore";
+import { UserInteractionStore } from "./user-interactions/infrastructure/userInteractionStore";
+import { TodosFeature } from "./container-components/TodosFeature";
 
 export const App = () => {
-    const [todos, setTodos] = useState<Todo[]>([]);
-    const [isFormVisible, setIsFormVisible] = useState(false);
-    const [initialFormValue, setInitialFormValue] = useState("");
-    const [actionToSubmit, setActionToSubmit] = useState<SubmitAction>(() => () => {
-        console.warn("no action to do");
-    });
-
-    useEffect(() => {
-        const makeRequest = async () => {
-            const todos = (await getTodos()) as Todo[];
-            setTodos(todos);
-        };
-        makeRequest();
-    }, []);
-
-    const toggleFormVisible = () => {
-        setIsFormVisible((previous) => !previous);
-    };
-
-    const todoListProps = { setTodos, todos, toggleFormVisible, setInitialFormValue, setActionToSubmit };
-    const todoHeadingProps = {
-        setInitialFormValue,
-        setActionToSubmit,
-        actionToSubmit,
-        initialFormValue,
-        isFormVisible,
-        toggleFormVisible,
-        setTodos,
-    };
-
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <TodoHeading {...todoHeadingProps} />
-                    <TodoList {...todoListProps} />
-                    <TodoStatistics todos={todos} />
+                    <TodoStore>
+                        <UserInteractionStore>
+                            <TodosFeature>
+                                <TodoHeading />
+                                <TodoList />
+                                <TodoStatistics />
+                            </TodosFeature>
+                        </UserInteractionStore>
+                    </TodoStore>
                 </Layout>
                 <Logo />
             </Container>
