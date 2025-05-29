@@ -1,3 +1,15 @@
+# Assignment Solution Description
+
+There are 3 branches in this repo:
+
+-   required: which solves the assigned tasks in the easiest way
+-   extension-1: which improves on application composition, starting to define an application core as a separate module
+-   extension-2: which finished the direction started in extension-1, creating an application core decoupled from infrastructure or UI
+
+Please watch the attached video and/or refer to readmes in the extension branches to read more about the approach.
+
+---
+
 # Datamole's React / TypeScript Assignment
 
 Please, read following instructions and let us know if anything is not clear.

@@ -9,6 +9,7 @@ export const getTodos = async () => {
         return todos;
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
+        return [];
     }
 };
 
@@ -25,6 +26,7 @@ export const postTodo = async (value: TodoLabel) => {
         return todo;
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
+        return [];
     }
 };
 
@@ -41,6 +43,7 @@ export const patchTodo = async (id: TodoId, draftTodo: Partial<Todo>) => {
         return returnedItem;
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
+        return [];
     }
 };
 
@@ -56,6 +59,7 @@ export const patchCompleteTodo = async (id: TodoId) => {
         return returnedItem;
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
+        return [];
     }
 };
 
@@ -66,5 +70,6 @@ export const deleteTodo = async (id: TodoId) => {
         });
     } catch (e: any) {
         console.error(e.name || "Unknown Error");
+        return [];
     }
 };
