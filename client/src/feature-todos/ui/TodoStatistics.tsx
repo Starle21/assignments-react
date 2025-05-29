@@ -1,5 +1,5 @@
-import { Footer } from "../components/Footer";
-import { useCountsStore } from "../user-interactions/infrastructure/todoStore";
+import { Footer } from "../../components/Footer";
+import { useCountsStore } from "../infrastructure/store/todoStore";
 
 export const TodoStatistics = () => {
     const { done, todo } = useCountsStore();

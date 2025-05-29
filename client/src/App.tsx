@@ -1,16 +1,13 @@
 import { Layout } from "./components/Layout";
 import { ThemeProvider } from "./styles/providers/ThemeProvider";
-import { useEffect, useState } from "react";
-import { FullTodo } from "./user-interactions/types";
-import { getTodos } from "./api";
-import { TodoHeading } from "./container-components/TodoHeading";
-import { TodoList } from "./container-components/TodoList";
 import { Container } from "./components/Container";
-import { TodoStatistics } from "./container-components/TodoStatistics";
 import { Logo } from "./components/Logo";
-import { TodoStore } from "./user-interactions/infrastructure/todoStore";
-import { UserInteractionStore } from "./user-interactions/infrastructure/userInteractionStore";
-import { TodosFeature } from "./container-components/TodosFeature";
+import { TodoStore } from "./feature-todos/infrastructure/store/todoStore";
+import { UserInteractionStore } from "./feature-todos/infrastructure/store/userInteractionStore";
+import { TodosFeature } from "./feature-todos/ui/TodosFeature";
+import { TodoHeading } from "./feature-todos/ui/TodoHeading";
+import { TodoList } from "./feature-todos/ui/TodoList";
+import { TodoStatistics } from "./feature-todos/ui/TodoStatistics";
 
 export const App = () => {
     return (

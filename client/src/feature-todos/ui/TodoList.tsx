@@ -1,8 +1,8 @@
-import { List } from "../components/List";
-import { ListItem } from "../components/ListItem";
 import { AnimatePresence, motion } from "framer-motion";
-import { useUserInteractionApi } from "../user-interactions/infrastructure/userInteractionStore";
-import { useTodoStore } from "../user-interactions/infrastructure/todoStore";
+import { useTodoStore } from "../infrastructure/store/todoStore";
+import { useUserInteractionApi } from "../infrastructure/store/userInteractionStore";
+import { List } from "../../components/List";
+import { ListItem } from "../../components/ListItem";
 
 export const TodoList = () => {
     const sortedTodos = useTodoStore();

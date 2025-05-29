@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
-import { Header } from "../components/Header";
-import { Form } from "../components/form";
 import { AnimatePresence, motion } from "framer-motion";
-import { useUIState, useUserInteractionApi } from "../user-interactions/infrastructure/userInteractionStore";
+import { useUIState, useUserInteractionApi } from "../infrastructure/store/userInteractionStore";
+import { Header } from "../../components/Header";
+import { Form } from "../../components/form";
 
 export const TodoHeading = () => {
     const { addTodo, cancelTodo } = useUserInteractionApi();

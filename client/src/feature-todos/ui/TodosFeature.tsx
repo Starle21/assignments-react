@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { useInitializeTodos } from "../user-interactions/initializeTodos";
+import { useInitializeTodos } from "../core/use-cases/initializeTodos";
 
 const TodosFeature = ({ children }: PropsWithChildren) => {
     useInitializeTodos();

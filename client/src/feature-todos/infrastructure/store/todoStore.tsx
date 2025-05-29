@@ -1,6 +1,9 @@
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
-import { CountedTodos, Nullable, Provider, RemoveOneTodoFromStore, SaveTodoStore, FullTodo, TodoId } from "../types";
-import { countTodos, sortTodos } from "../core";
+import { CountedTodos, FullTodo, TodoId } from "../../core/types";
+import { RemoveOneTodoFromStore, SaveTodoStore } from "../../core/ports.output";
+import { sortTodos } from "../../core/domain/sortTodos";
+import { countTodos } from "../../core/domain/countTodos";
+import { Nullable, Provider } from "../../../shared/types";
 
 // ===
 type TodoApi = {
@@ -24,11 +27,12 @@ export const useTodosStore = () => useContext(TodoContext);
 export const useCountsStore = () => useContext(CountsContext);
 
 export const useTodoStoreWriter: Provider<SaveTodoStore> = () => useTodoApi().saveTodo;
-export const useTodosStoreRemover: Provider<(id: TodoId) => void> = () => useTodoApi().removeTodo;
+export const useTodoStoreRemover: Provider<RemoveOneTodoFromStore> = () => useTodoApi().removeTodo;
 
 export const TodoStore = ({ children }: PropsWithChildren) => {
     const [todos, setTodos] = useState<FullTodo[]>([]);
 
+    // implicit injection, better to "bake" dependencies with partial application to make them more explicit
     const sortedTodos = useMemo(() => {
         return sortTodos(todos);
     }, [todos]);
