@@ -1,5 +1,8 @@
 ## Making the App's Composition Better Part 2
 
+Watch a video about it in the section "extension-2 branch":
+https://drive.google.com/file/d/1GZbTVrYzlUuQsX6zk2vEag28-XRULe3X/view
+
 Moving forward with isolating application core from the outside concerns of UI and infrastructure, the Use-Cases are now extracted into its own functions. They can be found in the core folder of the feature-todos. To be able to connect with the outside, we are using adapters and partial function application. The functions are pre-baked with their closures, and the Use-Case can call its own definition of its outside needs.
 
 For instance, in the createTodo function, there are 2 outside functions that the Use-Case gets in its closure:

@@ -1,5 +1,8 @@
 ## Making the App's Composition Better Part 1
 
+Watch a video about it in the section "extension-1 branch":
+https://drive.google.com/file/d/1GZbTVrYzlUuQsX6zk2vEag28-XRULe3X/view
+
 The point is to show how to make the core of the application modular, so it is easily extensible, ready to change, low on coupling, obvious on the first sight what it is doing, with well defined boundaries and functional core approach.
 
 Of course, for a toy CRUD application such as this one, it is an overkill, but on this small app, the concepts can be easier to present. The domain of this CRUD app is very shallow, containing mostly only the domain types.
