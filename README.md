@@ -6,7 +6,10 @@ There are 3 branches in this repo:
 -   extension-1: which improves on application composition, starting to define an application core as a separate module
 -   extension-2: which finished the direction started in extension-1, creating an application core decoupled from infrastructure or UI
 
-Please watch the attached video and/or refer to readmes in the extension branches to read more about the approach.
+There is a video where I walk through the code explaining my approach. You can find it on this address:
+https://drive.google.com/file/d/1GZbTVrYzlUuQsX6zk2vEag28-XRULe3X/view
+
+Please watch the video and/or refer to readmes in the extension branches to read more about the approach.
 
 ---
 
