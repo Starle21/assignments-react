@@ -1,4 +1,12 @@
-import { GetTodosServer, PostTodoServer, FullTodo, TodoId, PatchCompleteTodoServer, DeleteTodoServer, PatchTodoServer } from "./user-interactions/types";
+import {
+    GetTodosServer,
+    PostTodoServer,
+    FullTodo,
+    TodoId,
+    PatchCompleteTodoServer,
+    DeleteTodoServer,
+    PatchTodoServer,
+} from "./user-interactions/types";
 
 const base = "http://localhost:3000";
 
